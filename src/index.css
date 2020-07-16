@@ -7,6 +7,12 @@ body {
 input[type="file"]::-webkit-file-upload-button {
   visibility: hidden;
 }
+
+input {
+  border: none !important;
+  outline: none !important;
+}
+
 .headerChoose {
   font-family: "Comic Neue", cursive;
   color: white;

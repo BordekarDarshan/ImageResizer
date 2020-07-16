@@ -6,27 +6,23 @@ function HomeUI() {
 
   function UploadImage(e) {
     let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = e => {
-      //Initiate the JavaScript Image object.
-      let image = new Image();
+    try {
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (e) => {
+        //Initiate the JavaScript Image object.
+        let image = new Image();
 
-      //Set the Base64 string return from FileReader as source.
-      image.src = e.target.result;
+        //Set the Base64 string return from FileReader as source.
+        image.src = e.target.result;
 
-      //Validate the File Height and Width.
-      image.onload = function() {
-        let W = this.height;
-        let H = this.width;
-        if (W === 1024 && H === 1024) {
+        //Validate the File Height and Width.
+        image.onload = function () {
           return setProfile(image.src);
-        } else {
-          alert("Sorry.... Please Select A 1024*1024 Image!!!!!");
-          window.location.reload();
-          return false;
-        }
+        };
       };
-    };
+    } catch (error) {
+      console.log("Try Reloading Page");
+    }
   }
 
   return (

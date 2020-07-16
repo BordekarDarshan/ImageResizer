@@ -9,9 +9,9 @@ export class ImageGeneratorUI extends Component {
       crop: {
         unit: "px",
         width: 755,
-        height: 450
+        height: 450,
       },
-      croppedImageUrl: null
+      croppedImageUrl: null,
     };
   }
   changeSizeOne = () => {
@@ -19,7 +19,7 @@ export class ImageGeneratorUI extends Component {
     sizeOne = {
       ...sizeOne,
       width: 755,
-      height: 450
+      height: 450,
     };
     console.log(sizeOne);
 
@@ -31,7 +31,7 @@ export class ImageGeneratorUI extends Component {
     sizeTwo = {
       ...sizeTwo,
       width: 365,
-      height: 450
+      height: 450,
     };
     console.log(sizeTwo);
 
@@ -43,9 +43,8 @@ export class ImageGeneratorUI extends Component {
     sizeThree = {
       ...sizeThree,
       width: 365,
-      height: 215
+      height: 215,
     };
-    console.log(sizeThree);
 
     this.onCropChange(sizeThree);
     this.onCropComplete(sizeThree);
@@ -55,28 +54,25 @@ export class ImageGeneratorUI extends Component {
     sizeFour = {
       ...sizeFour,
       width: 380,
-      height: 380
+      height: 380,
     };
-    console.log(sizeFour);
 
     this.onCropChange(sizeFour);
     this.onCropComplete(sizeFour);
   };
 
-  onImageLoaded = image => {
+  onImageLoaded = (image) => {
     this.imageRef = image;
   };
 
-  onCropComplete = crop => {
+  onCropComplete = (crop) => {
     this.makeClientCrop(crop);
-    console.log(crop);
   };
 
   onCropChange = (crop, percentCrop) => {
     // You could also use percentCrop:
     // this.setState({ crop: percentCrop });
     this.setState({ crop });
-    console.log(this.state.crop);
   };
 
   async makeClientCrop(crop) {
@@ -97,8 +93,6 @@ export class ImageGeneratorUI extends Component {
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext("2d");
-    console.log(image.width);
-    console.log(image.naturalWidth);
 
     ctx.drawImage(
       image,
@@ -113,7 +107,7 @@ export class ImageGeneratorUI extends Component {
     );
 
     return new Promise((resolve, reject) => {
-      canvas.toBlob(blob => {
+      canvas.toBlob((blob) => {
         if (!blob) {
           //reject(new Error('Canvas is empty'));
           console.error("Canvas is empty");
