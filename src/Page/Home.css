@@ -36,7 +36,7 @@ input[type="file"] {
 }
 
 .selected-image-container {
-  width: 50%;
+  width: 40%;
   box-sizing: border-box;
   padding: 20px;
 }
@@ -49,6 +49,13 @@ input[type="file"] {
 
 .image-container {
   display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 968px) {
+  .selected-image-container {
+    width: 50%;
+  }
 }
 
 @media screen and (max-width: 768px) {
