@@ -1,6 +1,12 @@
 import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
+import "./Home.css";
 import "react-image-crop/dist/ReactCrop.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlusCircle,
+  faArrowCircleDown,
+} from "@fortawesome/fontawesome-free-solid";
 
 class Home extends PureComponent {
   state = {
@@ -12,34 +18,14 @@ class Home extends PureComponent {
     },
   };
 
-  invalidateImage = (file) => {
-    return new Promise((resolve, reject) => {
-      let img = new Image();
-      img.src = window.URL.createObjectURL(file);
-      img.onload = () => {
-        if (img.width >= 500 && img.height >= 500) {
-          resolve(true);
-        } else {
-          reject("please enter valid image");
-        }
-      };
-    });
-  };
-
   onSelectFile = (e) => {
     let { files } = e.target;
     if (files && files.length > 0) {
-      this.invalidateImage(files[0])
-        .then(() => {
-          const reader = new FileReader();
-          reader.addEventListener("load", () =>
-            this.setState({ src: reader.result })
-          );
-          reader.readAsDataURL(files[0]);
-        })
-        .catch((data) => {
-          console.log(data);
-        });
+      const reader = new FileReader();
+      reader.addEventListener("load", () =>
+        this.setState({ src: reader.result })
+      );
+      reader.readAsDataURL(files[0]);
     }
   };
 
@@ -105,24 +91,49 @@ class Home extends PureComponent {
     const { crop, croppedImageUrl, src } = this.state;
 
     return (
-      <div className="App">
+      <>
         <div>
-          <input type="file" accept="image/*" onChange={this.onSelectFile} />
+          <label for="file-upload" class="custom-file-upload">
+            <input
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              onChange={this.onSelectFile}
+            />
+            <FontAwesomeIcon icon={faPlusCircle} />
+            Upload
+          </label>
         </div>
-        {src && (
-          <ReactCrop
-            src={src}
-            crop={crop}
-            ruleOfThirds
-            onImageLoaded={this.onImageLoaded}
-            onComplete={this.onCropComplete}
-            onChange={this.onCropChange}
-          />
-        )}
-        {croppedImageUrl && (
-          <img alt="Crop" style={{ maxWidth: "100%" }} src={croppedImageUrl} />
-        )}
-      </div>
+        <div className="image-container">
+          <div className="selected-image-container">
+            {src && (
+              <ReactCrop
+                src={src}
+                crop={crop}
+                ruleOfThirds
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                onChange={this.onCropChange}
+              />
+            )}
+          </div>
+          <div className="cropped-image-container">
+            {croppedImageUrl && (
+              <>
+                <img
+                  alt="Crop"
+                  style={{ maxWidth: "100%" }}
+                  src={croppedImageUrl}
+                />
+                <a href={croppedImageUrl} download class="custom-file-upload">
+                  <FontAwesomeIcon icon={faArrowCircleDown} />
+                  Download
+                </a>
+              </>
+            )}
+          </div>
+        </div>
+      </>
     );
   }
 }
