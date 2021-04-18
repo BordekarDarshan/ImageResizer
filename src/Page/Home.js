@@ -136,7 +136,11 @@ class Home extends PureComponent {
                   style={{ maxWidth: "100%" }}
                   src={croppedImageUrl}
                 />
-                <a href={croppedImageUrl} download class="custom-file-upload">
+                <a
+                  href={croppedImageUrl}
+                  download
+                  className="custom-file-upload"
+                >
                   <FontAwesomeIcon icon={faArrowCircleDown} />
                   Download
                 </a>

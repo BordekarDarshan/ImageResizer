@@ -5,7 +5,7 @@ function AspectRatioOptions({ changeSizeOne }) {
     <div>
       <button
         type="button"
-        class="btn btn-dark m-2"
+        className="btn btn-dark m-2"
         onClick={() => {
           changeSizeOne(755, 450);
         }}
@@ -15,7 +15,7 @@ function AspectRatioOptions({ changeSizeOne }) {
 
       <button
         type="button"
-        class="btn btn-dark m-2"
+        className="btn btn-dark m-2"
         onClick={() => {
           changeSizeOne(365, 450);
         }}
@@ -24,7 +24,7 @@ function AspectRatioOptions({ changeSizeOne }) {
       </button>
       <button
         type="button"
-        class="btn btn-dark m-2"
+        className="btn btn-dark m-2"
         onClick={() => {
           changeSizeOne(365, 212);
         }}
@@ -33,7 +33,7 @@ function AspectRatioOptions({ changeSizeOne }) {
       </button>
       <button
         type="button"
-        class="btn btn-dark m-2"
+        className="btn btn-dark m-2"
         onClick={() => {
           changeSizeOne(380, 380);
         }}
