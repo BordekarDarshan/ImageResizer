@@ -21,10 +21,14 @@ input[type="file"] {
   font-weight: 500;
   user-select: none;
   touch-action: manipulation;
+  text-decoration: none !important;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 20%), 0 4px 6px -2px rgb(0 0 0 / 5%);
   transition: background-color 160ms, color 160ms, box-shadow 160ms,
     border 160ms;
-  font-family: "Antonio", sans-serif;
+}
+
+.custom-file-upload:hover {
+  color: black;
 }
 
 .custom-file-upload > svg {

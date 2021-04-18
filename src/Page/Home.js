@@ -1,20 +1,21 @@
 import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
-import "./Home.css";
 import "react-image-crop/dist/ReactCrop.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlusCircle,
   faArrowCircleDown,
 } from "@fortawesome/fontawesome-free-solid";
+import "./Home.css";
+import AspectRatioOptions from "../Components/AspectRatioOptions";
 
 class Home extends PureComponent {
   state = {
     src: null,
     crop: {
-      unit: "%",
-      width: 30,
-      aspect: 16 / 9,
+      unit: "px",
+      width: 380,
+      height: 380,
     },
   };
 
@@ -28,8 +29,17 @@ class Home extends PureComponent {
       reader.readAsDataURL(files[0]);
     }
   };
+  changeSizeOne = (w, h) => {
+    let aspectRatio = Object.assign({}, this.state.crop);
+    aspectRatio = {
+      ...aspectRatio,
+      width: w,
+      height: h,
+    };
+    this.onCropChange(aspectRatio);
+    this.onCropComplete(aspectRatio);
+  };
 
-  // If you setState the crop in here you should return false.
   onImageLoaded = (image) => {
     this.imageRef = image;
   };
@@ -103,6 +113,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faPlusCircle} />
             Upload
           </label>
+          <AspectRatioOptions changeSizeOne={this.changeSizeOne} />
         </div>
         <div className="image-container">
           <div className="selected-image-container">

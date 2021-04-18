@@ -1,6 +1,7 @@
 body {
   margin: 0 !important;
   background-color: rgb(32, 33, 36) !important;
+  font-family: "Antonio", sans-serif !important;
 }
 
 ::-webkit-scrollbar {
