@@ -12,13 +12,34 @@ class Home extends PureComponent {
     },
   };
 
+  invalidateImage = (file) => {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        if (img.width >= 500 && img.height >= 500) {
+          resolve(true);
+        } else {
+          reject("please enter valid image");
+        }
+      };
+    });
+  };
+
   onSelectFile = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () =>
-        this.setState({ src: reader.result })
-      );
-      reader.readAsDataURL(e.target.files[0]);
+    let { files } = e.target;
+    if (files && files.length > 0) {
+      this.invalidateImage(files[0])
+        .then(() => {
+          const reader = new FileReader();
+          reader.addEventListener("load", () =>
+            this.setState({ src: reader.result })
+          );
+          reader.readAsDataURL(files[0]);
+        })
+        .catch((data) => {
+          console.log(data);
+        });
     }
   };
 
@@ -31,9 +52,7 @@ class Home extends PureComponent {
     this.makeClientCrop(crop);
   };
 
-  onCropChange = (crop, percentCrop) => {
-    // You could also use percentCrop:
-    // this.setState({ crop: percentCrop });
+  onCropChange = (crop) => {
     this.setState({ crop });
   };
 
@@ -71,7 +90,6 @@ class Home extends PureComponent {
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) {
-          //reject(new Error('Canvas is empty'));
           console.error("Canvas is empty");
           return;
         }
