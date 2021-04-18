@@ -93,7 +93,7 @@ class Home extends PureComponent {
     return (
       <>
         <div>
-          <label for="file-upload" class="custom-file-upload">
+          <label htmlFor="file-upload" className="custom-file-upload">
             <input
               id="file-upload"
               type="file"

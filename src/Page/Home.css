@@ -32,20 +32,29 @@ input[type="file"] {
 }
 
 .selected-image-container {
-  width: 50vw;
+  width: 50%;
   box-sizing: border-box;
-  padding: 10px;
-  margin: 10px;
-  height: 70%;
+  padding: 20px;
 }
 
 .cropped-image-container {
-  width: 50vw;
+  width: 50%;
   box-sizing: border-box;
-  padding: 10px;
-  margin: 10px;
+  padding: 20px;
 }
 
 .image-container {
   display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .image-container {
+    flex-flow: column;
+  }
+
+  .selected-image-container,
+  .cropped-image-container {
+    box-sizing: border-box !important;
+    width: 100%;
+  }
 }
